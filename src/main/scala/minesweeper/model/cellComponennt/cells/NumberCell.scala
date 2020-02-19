@@ -1,5 +1,6 @@
 package minesweeper.model.cellComponennt.cells
 
-case class NumberCell(number: Int, flagged: Boolean, visible: Boolean) extends Cell {
-
+case class NumberCell(flagged: Boolean, visible: Boolean, number: Int) extends Cell {
+  override val name: String = "Number"
+  override def toString: String = name
 }

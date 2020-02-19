@@ -8,4 +8,6 @@ import scala.swing.Publisher
 trait ControllerInterface extends Publisher {
   var board: BoardInterface
   var gameState: GameStateInterface
+
+  def winConditionFullFilled: Boolean
 }
