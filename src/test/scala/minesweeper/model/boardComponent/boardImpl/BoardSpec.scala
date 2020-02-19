@@ -1,8 +1,8 @@
 package minesweeper.model.boardComponent.boardImpl
 
 import minesweeper.model.boardComponennt.boardImpl.Board
-import minesweeper.model.cellComponennt.cellImpl.CellFactory
-import minesweeper.model.cellComponennt.cellImpl.cells.{BombCell, Cell, NumberCell}
+import minesweeper.model.cellComponennt.CellFactory
+import minesweeper.model.cellComponennt.cells.{BombCell, Cell, NumberCell}
 import org.scalatest.{Matchers, WordSpec}
 
 class BoardSpec extends WordSpec with Matchers {

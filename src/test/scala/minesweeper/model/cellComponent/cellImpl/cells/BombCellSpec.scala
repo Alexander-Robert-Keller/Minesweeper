@@ -1,6 +1,6 @@
 package minesweeper.model.cellComponent.cellImpl.cells
 
-import minesweeper.model.cellComponennt.cellImpl.cells.BombCell
+import minesweeper.model.cellComponennt.cells.BombCell
 import org.scalatest.{Matchers, WordSpec}
 
 class BombCellSpec extends WordSpec with Matchers {

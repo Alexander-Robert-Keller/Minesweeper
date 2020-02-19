@@ -3,8 +3,8 @@ package minesweeper.model.boardComponennt.boardImpl
 import com.google.inject.Inject
 import com.google.inject.name.Named
 import minesweeper.model.boardComponennt.BoardInterface
-import minesweeper.model.cellComponennt.cellImpl.CellFactory
-import minesweeper.model.cellComponennt.cellImpl.cells.Cell
+import minesweeper.model.cellComponennt.CellFactory
+import minesweeper.model.cellComponennt.cells.Cell
 
 class DefaultBoard @Inject()(@Named("DefaultValue") value: Int) extends BoardInterface {
 

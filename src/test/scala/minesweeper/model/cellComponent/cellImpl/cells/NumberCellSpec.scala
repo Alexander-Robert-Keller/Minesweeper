@@ -1,6 +1,6 @@
 package minesweeper.model.cellComponent.cellImpl.cells
 
-import minesweeper.model.cellComponennt.cellImpl.cells.NumberCell
+import minesweeper.model.cellComponennt.cells.NumberCell
 import org.scalatest.{Matchers, WordSpec}
 
 class NumberCellSpec extends WordSpec with Matchers {

@@ -3,8 +3,8 @@ package minesweeper.model.boardComponennt.boardImpl
 import com.google.inject.Inject
 import com.google.inject.name.Named
 import minesweeper.model.boardComponennt.BoardInterface
-import minesweeper.model.cellComponennt.cellImpl.CellFactory
-import minesweeper.model.cellComponennt.cellImpl.cells.{Cell, EmptyCell}
+import minesweeper.model.cellComponennt.CellFactory
+import minesweeper.model.cellComponennt.cells.{Cell, EmptyCell}
 
 import scala.util.Random
 

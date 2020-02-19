@@ -1,4 +1,4 @@
-package minesweeper.model.cellComponennt.cellImpl.cells
+package minesweeper.model.cellComponennt.cells
 
 trait Cell {
   val flagged: Boolean

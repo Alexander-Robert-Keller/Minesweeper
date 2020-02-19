@@ -1,7 +1,7 @@
 package minesweeper.model.boardComponent.boardImpl
 
 import minesweeper.model.boardComponennt.boardImpl.{Board, DefaultBoard}
-import minesweeper.model.cellComponennt.cellImpl.cells.Cell
+import minesweeper.model.cellComponennt.cells.Cell
 import org.scalatest.{Matchers, WordSpec}
 
 class DefaultBoardSpec extends WordSpec with Matchers{

@@ -1,7 +1,7 @@
 package minesweeper.model.boardComponennt
 
 import minesweeper.model.boardComponennt.boardImpl.Board
-import minesweeper.model.cellComponennt.cellImpl.cells.Cell
+import minesweeper.model.cellComponennt.cells.Cell
 
 trait BoardInterface {
   def getMatrix: Vector[Vector[Cell]]

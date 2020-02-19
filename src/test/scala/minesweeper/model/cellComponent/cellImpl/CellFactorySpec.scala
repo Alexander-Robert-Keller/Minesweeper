@@ -1,7 +1,7 @@
 package minesweeper.model.cellComponent.cellImpl
 
-import minesweeper.model.cellComponennt.cellImpl.CellFactory
-import minesweeper.model.cellComponennt.cellImpl.cells.{BombCell, EmptyCell, NumberCell}
+import minesweeper.model.cellComponennt.CellFactory
+import minesweeper.model.cellComponennt.cells.{BombCell, EmptyCell, NumberCell}
 import org.scalatest.{Matchers, WordSpec}
 
 class CellFactorySpec extends WordSpec with Matchers {
