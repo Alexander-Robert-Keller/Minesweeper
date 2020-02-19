@@ -1,11 +1,10 @@
 package minesweeper.model.boardComponennt.boardImpl
 
-import com.google.inject.Inject
-import com.google.inject.name.Named
 import minesweeper.model.boardComponennt.BoardInterface
 import minesweeper.model.cellComponennt.CellFactory
 import minesweeper.model.cellComponennt.cells.{Cell, EmptyCell}
 
+import scala.collection.mutable
 import scala.util.Random
 
 class Board (matrix: Vector[Vector[Cell]], width: Int, height: Int, flags: Int, bombs: Int) extends BoardInterface {
@@ -93,5 +92,29 @@ class Board (matrix: Vector[Vector[Cell]], width: Int, height: Int, flags: Int, 
 
   override def getUpdatedBoard(oldMatrix: Vector[Vector[Cell]], x: Int, y: Int, cell: Cell): BoardInterface = {
     new Board(updateMatrix(oldMatrix, x, y, cell), width, height, flags, bombs)
+  }
+
+  override def toString: String = {
+    val boardString = new mutable.StringBuilder("")
+    for (y <- getMatrix(0).indices) {
+      val dividerString = new mutable.StringBuilder("")
+      for (x <- getMatrix.indices) {
+        if (getMatrix(x)(y).visible) {
+          getMatrix(x)(y).name match {
+            case "Empty" => boardString ++= "E"
+            case "Number" =>  boardString ++= getMatrix(x)(y).number.toString
+            case "Bomb" =>  boardString ++= "B"
+          }
+        } else {
+          boardString ++= " "
+        }
+        boardString ++= "|"
+        dividerString ++= "-+"
+      }
+      boardString ++= "\n"
+      boardString ++= dividerString
+      boardString ++= "\n"
+    }
+    boardString.toString()
   }
 }

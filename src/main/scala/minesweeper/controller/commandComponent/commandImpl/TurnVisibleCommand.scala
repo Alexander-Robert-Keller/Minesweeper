@@ -6,7 +6,7 @@ import minesweeper.model.boardComponennt.BoardInterface
 import minesweeper.model.cellComponennt.CellFactory
 import minesweeper.model.cellComponennt.cells.Cell
 import minesweeper.model.gameStateComponent.GameStateInterface
-import minesweeper.util.{LostGame, TurnFieldVisible, WonGame}
+import minesweeper.util.{LostGame, TurnCellVisible, WonGame}
 
 case class TurnVisibleCommand(controller: ControllerInterface) extends Command {
   override var board: BoardInterface = _
@@ -24,7 +24,6 @@ case class TurnVisibleCommand(controller: ControllerInterface) extends Command {
       controller.publish(new WonGame)
       return
     }
-    controller.publish(new TurnFieldVisible)
   }
 
   override def redoStep(): Unit = {

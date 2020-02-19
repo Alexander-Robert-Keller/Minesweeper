@@ -22,11 +22,14 @@ class MinesweeperModule extends AbstractModule with ScalaModule {
     // there are two possible ways to create a new Board, over the injection or over the boardInterface itself
     bind[BoardInterface].to[AdvancedBoard]
     bind[BoardInterface].annotatedWithName(name = "Small").toInstance(board.createNewBoard(10, 10, 25))
-    bind[BoardInterface].annotatedWithName(name = "Normal").toInstance(board.createNewBoard(50, 50, 625))
-    bind[BoardInterface].annotatedWithName(name = "Big").toInstance(board.createNewBoard(100, 100, 2500))
+    bind[BoardInterface].annotatedWithName(name = "Normal").toInstance(board.createNewBoard(20, 20, 100))
+    bind[BoardInterface].annotatedWithName(name = "Big").toInstance(board.createNewBoard(30, 30, 900/4))
 
     // create new GameStates over injection only, it also helps to Maintain a list of possible GameStates
     bind[GameStateInterface].to[GameState]
     bind[GameStateInterface].annotatedWithName("MainMenu").toInstance(new GameState(0))
+    bind[GameStateInterface].annotatedWithName("EnterFieldSize").toInstance(new GameState(1))
+    bind[GameStateInterface].annotatedWithName("CostumeBoard").toInstance(new GameState(2))
+    bind[GameStateInterface].annotatedWithName("InGame").toInstance(new GameState(3))
   }
 }

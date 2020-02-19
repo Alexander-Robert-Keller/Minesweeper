@@ -16,7 +16,6 @@ case class UnFlagCommand(controller: ControllerInterface) extends Command {
     val cell: Cell = controller.board.getMatrix(x)(y)
     val tmp = CellFactory.setCellUnFlagged(cell)
     controller.board = controller.board.getUpdatedBoard(controller.board.getMatrix, x, y, tmp)
-    controller.publish(new UnFlaggedCell)
   }
 
   override def redoStep(): Unit = {

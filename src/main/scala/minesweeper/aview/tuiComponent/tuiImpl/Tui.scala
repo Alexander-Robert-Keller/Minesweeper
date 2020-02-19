@@ -1,6 +1,7 @@
 package minesweeper.aview.tuiComponent.tuiImpl
 
 import minesweeper.controller.controllerComponent.ControllerInterface
+import minesweeper.util._
 
 import scala.swing.Reactor
 
@@ -9,10 +10,10 @@ import scala.swing.Reactor
 class Tui(controller: ControllerInterface) extends Reactor {
   listenTo(controller)
 
-  var tuiMenu: TuiMenu = MainMenu.determineMenu()
+  var tuiMenu: TuiMenu = MainMenu.determineMenu(controller)
 
   def displayMenuOptions(): Unit = {
-    tuiMenu = tuiMenu.determineMenu()
+    tuiMenu = tuiMenu.determineMenu(controller)
     println(tuiMenu.toString)
   }
 
@@ -22,12 +23,40 @@ class Tui(controller: ControllerInterface) extends Reactor {
   }
 
   def processInputLine(input: String): Unit = {
-    tuiMenu = tuiMenu.determineMenu()
+    tuiMenu = tuiMenu.determineMenu(controller)
     try {
       val option = input.toInt
       tuiMenu.action(option - 1, controller)
     } catch {
       case _: Exception => tuiMenu.action(Integer.MAX_VALUE, controller)
     }
+  }
+
+  reactions += {
+    case event: EnterFieldSize =>
+      displayMenuOptions()
+    case event: EndGame =>
+      displayMenuOptions()
+    case event: EndProgram =>
+    case event: TurnCellVisible =>
+      println(controller.board.toString)
+      displayMenuOptions()
+    case event: WonGame =>
+      displayMenuOptions()
+    case event: LostGame =>
+      displayMenuOptions()
+    case event: UnFlaggedCell =>
+      println(controller.board.toString)
+      displayMenuOptions()
+    case event: FlaggedCell =>
+      println(controller.board.toString)
+      displayMenuOptions()
+    case event: FieldSizeEntered =>
+      println(controller.board.toString)
+      displayMenuOptions()
+    case event: NoCellFound =>
+      println(controller.noSuchCellFoundString)
+      displayMenuOptions()
+    case _ => displayMenuOptions()
   }
 }

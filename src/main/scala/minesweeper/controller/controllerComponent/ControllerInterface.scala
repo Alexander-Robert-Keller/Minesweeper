@@ -8,8 +8,16 @@ import scala.swing.Publisher
 trait ControllerInterface extends Publisher {
   var board: BoardInterface
   var gameState: GameStateInterface
+  val noSuchCellFoundString: String
 
+  def startGame(): Unit
+  def endProgram(): Unit
+  def endGame(): Unit
   def winConditionFullFilled: Boolean
   def initializeGame(input: String): Unit
-  def initializeGame(width: Int, height: Int, bombs: Int): Unit
+  def initializeGame(width: Int, height: Int): Unit
+  def flagCell(x: Int, y: Int): Unit
+  def unFlagCell(x: Int, y: Int): Unit
+  def turnCellVisible(x: Int, y: Int): Unit
+  def noSuchCellFound(): Unit
 }

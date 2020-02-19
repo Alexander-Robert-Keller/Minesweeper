@@ -19,7 +19,6 @@ case class FlagCommand(controller: ControllerInterface) extends Command {
     if (controller.winConditionFullFilled) {
       controller.publish(new WonGame)
     }
-    controller.publish(new FlaggedCell)
   }
 
   override def redoStep(): Unit = {

@@ -9,7 +9,7 @@ trait TuiMenu {
 
   def add(s: MenuItems): Unit = menuOptions = menuOptions :+ s
 
-  def determineMenu(/*determine through GameState */): TuiMenu = MainMenu //TODO: change
+  def determineMenu(controller: ControllerInterface): TuiMenu
 
   def action(index: Int, controller: ControllerInterface): Unit = {
     if (menuOptions.size > index) {
@@ -35,13 +35,31 @@ object MainMenu extends TuiMenu {
   add(StartGameMenuItem)
   add(LoadGameMenuItem)
   add(ExitProgramMenuItem)
+
+  override def determineMenu(controller: ControllerInterface): TuiMenu = {
+    controller.gameState.getState match {
+      case 0 => MainMenu
+      case 1 => EnterFieldSize
+      case 2 => ??? //TODO: implement
+      case 3 => GameMenu
+    }
+  }
 }
 
 object EnterFieldSize extends TuiMenu {
   add(SmallBoardMenuItem)
   add(NormalBoardItem)
   add(BigBoardItem)
-  add(CostumBoardItem)
+  add(CostumeBoardItem)
+
+  override def determineMenu(controller: ControllerInterface): TuiMenu = {
+    controller.gameState.getState match {
+      case 0 => MainMenu
+      case 1 => EnterFieldSize
+      case 2 => ??? //TODO: implement
+      case 3 => GameMenu
+    }
+  }
 }
 
 object GameMenu extends TuiMenu {
@@ -52,4 +70,13 @@ object GameMenu extends TuiMenu {
   add(UndoMenuItem)
   add(RedoMenuItem)
   add(ExitGameMenuItem)
+
+  override def determineMenu(controller: ControllerInterface): TuiMenu = {
+    controller.gameState.getState match {
+      case 0 => MainMenu
+      case 1 => EnterFieldSize
+      case 2 => ??? //TODO: implement
+      case 3 => GameMenu
+    }
+  }
 }
