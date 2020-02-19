@@ -22,6 +22,7 @@ case class TurnVisibleCommand(controller: ControllerInterface) extends Command {
     }
     if (controller.winConditionFullFilled) {
       controller.publish(new WonGame)
+      return
     }
     controller.publish(new TurnFieldVisible)
   }

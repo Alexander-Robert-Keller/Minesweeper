@@ -21,8 +21,43 @@ class Board (matrix: Vector[Vector[Cell]], width: Int, height: Int, flags: Int, 
   override def getBombs: Int = bombs
 
   override def createNewBoard(maxWidth: Int, maxHeight: Int, maxBombs: Int): BoardInterface = {
-    val tmp = Vector.fill[Cell](maxWidth, maxHeight)(CellFactory.createCell("Empty"))
-    new Board(setBombs(maxWidth, maxHeight, maxBombs, tmp), maxWidth, maxHeight, 0, maxBombs)
+    var tmp = Vector.fill[Cell](maxWidth, maxHeight)(CellFactory.createCell("Empty"))
+    tmp = setBombs(maxWidth, maxHeight, maxBombs, tmp)
+    tmp = setNumbers(maxWidth, maxHeight, maxBombs, tmp)
+    new Board(tmp, maxWidth, maxHeight, 0, maxBombs)
+  }
+
+  def setNumbers(maxWidth: Int, maxHeight: Int, maxBombs: Int, oldMatrix: Vector[Vector[Cell]]): Vector[Vector[Cell]] = {
+    var tmp: Vector[Vector[Cell]] = oldMatrix
+    for (x <- 0 until maxWidth) {
+      for (y <- 0 until maxHeight) {
+        if (oldMatrix(x)(y).toString.equals("Empty")) {
+          tmp = updateMatrix(tmp, x, y, CellFactory.createCell("Number", searchForBombs(x, y, oldMatrix)))
+        }
+      }
+    }
+    tmp
+  }
+
+  def searchForBombs(x: Int, y: Int, oldMatrix: Vector[Vector[Cell]]): Int = {
+    var count = 0
+    count = count + checkForBomb(x - 1, y - 1, oldMatrix)
+    count = count + checkForBomb(x - 1, y, oldMatrix)
+    count = count + checkForBomb(x - 1, y + 1, oldMatrix)
+    count = count + checkForBomb(x, y - 1, oldMatrix)
+    count = count + checkForBomb(x, y + 1, oldMatrix)
+    count = count + checkForBomb(x + 1, y - 1, oldMatrix)
+    count = count + checkForBomb(x + 1, y, oldMatrix)
+    count = count + checkForBomb(x + 1, y + 1, oldMatrix)
+    count
+  }
+
+  def checkForBomb(x: Int, y: Int, oldMatrix: Vector[Vector[Cell]]): Int = {
+    if (x >= 0 && x < oldMatrix.length && y >= 0 && y < oldMatrix(0).length) {
+      if (oldMatrix(x)(y).toString.equals("Bomb"))
+        return 1
+    }
+    0
   }
 
   //used to create new Bombs
