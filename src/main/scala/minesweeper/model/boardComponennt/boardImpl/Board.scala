@@ -32,14 +32,17 @@ class Board (matrix: Vector[Vector[Cell]], width: Int, height: Int, flags: Int, 
     for (x <- 0 until maxWidth) {
       for (y <- 0 until maxHeight) {
         if (oldMatrix(x)(y).toString.equals("Empty")) {
-          tmp = updateMatrix(tmp, x, y, CellFactory.createCell("Number", searchForBombs(x, y, oldMatrix)))
+          val count = searchForBombs(x, y, oldMatrix)
+          if (count > 0) {
+            tmp = updateMatrix(tmp, x, y, CellFactory.createCell("Number", count))
+          }
         }
       }
     }
     tmp
   }
 
-  def searchForBombs(x: Int, y: Int, oldMatrix: Vector[Vector[Cell]]): Int = {
+  private def searchForBombs(x: Int, y: Int, oldMatrix: Vector[Vector[Cell]]): Int = {
     var count = 0
     count = count + checkForBomb(x - 1, y - 1, oldMatrix)
     count = count + checkForBomb(x - 1, y, oldMatrix)
@@ -52,7 +55,7 @@ class Board (matrix: Vector[Vector[Cell]], width: Int, height: Int, flags: Int, 
     count
   }
 
-  def checkForBomb(x: Int, y: Int, oldMatrix: Vector[Vector[Cell]]): Int = {
+  private def checkForBomb(x: Int, y: Int, oldMatrix: Vector[Vector[Cell]]): Int = {
     if (x >= 0 && x < oldMatrix.length && y >= 0 && y < oldMatrix(0).length) {
       if (oldMatrix(x)(y).toString.equals("Bomb"))
         return 1

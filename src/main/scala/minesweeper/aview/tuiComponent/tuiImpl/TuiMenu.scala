@@ -1,7 +1,6 @@
 package minesweeper.aview.tuiComponent.tuiImpl
 
 import minesweeper.controller.controllerComponent.ControllerInterface
-import minesweeper.controller.controllerComponent.controllerImpl.Controller
 
 import scala.collection.mutable
 
@@ -33,5 +32,17 @@ trait TuiMenu {
 }
 
 object MainMenu extends TuiMenu {
-  add(WrongCommandMenuItem)
+  add(StartGameMenuItem)
+  add(LoadGameMenuItem)
+  add(ExitProgramMenuItem)
+}
+
+object GameMenu extends TuiMenu {
+  add(RevealCellMenuItem)
+  add(FlagCellMenuItem)
+  add(UnFlagCellMenuItem)
+  add(SaveGameMenuItem)
+  add(UndoMenuItem)
+  add(RedoMenuItem)
+  add(ExitGameMenuItem)
 }
