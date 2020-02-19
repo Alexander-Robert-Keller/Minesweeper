@@ -37,6 +37,13 @@ object MainMenu extends TuiMenu {
   add(ExitProgramMenuItem)
 }
 
+object EnterFieldSize extends TuiMenu {
+  add(SmallBoardMenuItem)
+  add(NormalBoardItem)
+  add(BigBoardItem)
+  add(CostumBoardItem)
+}
+
 object GameMenu extends TuiMenu {
   add(RevealCellMenuItem)
   add(FlagCellMenuItem)

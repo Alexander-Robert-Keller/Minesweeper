@@ -77,5 +77,29 @@ object RedoMenuItem extends MenuItems {
   override def action(controller: ControllerInterface): Unit = ???
 }
 
+object SmallBoardMenuItem extends MenuItems {
+  override val name: String = "Small Board"
+
+  override def action(controller: ControllerInterface): Unit = ???
+}
+
+object NormalBoardItem extends MenuItems {
+  override val name: String = "Normal Board"
+
+  override def action(controller: ControllerInterface): Unit = ???
+}
+
+object BigBoardItem extends MenuItems {
+  override val name: String = "Big Board"
+
+  override def action(controller: ControllerInterface): Unit = ???
+}
+
+object CostumBoardItem extends MenuItems {
+  override val name: String = "Costum Board"
+
+  override def action(controller: ControllerInterface): Unit = ???
+}
+
 
 

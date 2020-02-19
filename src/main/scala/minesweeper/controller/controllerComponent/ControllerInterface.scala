@@ -10,4 +10,6 @@ trait ControllerInterface extends Publisher {
   var gameState: GameStateInterface
 
   def winConditionFullFilled: Boolean
+  def initializeGame(input: String): Unit
+  def initializeGame(width: Int, height: Int, bombs: Int): Unit
 }
