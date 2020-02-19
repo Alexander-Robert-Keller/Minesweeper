@@ -6,7 +6,7 @@ import org.scalatest.{Matchers, WordSpec}
 class NumberCellSpec extends WordSpec with Matchers {
   "A EmptyCell" when {
     "new" should {
-      val numberCell: NumberCell = NumberCell(1, flagged = false, visible = false)
+      val numberCell: NumberCell = NumberCell(flagged = false, visible = false, 1)
       "have a boolean visible. It tells us if the cell is visible for the player" in {
         numberCell.visible should be (false)
       }

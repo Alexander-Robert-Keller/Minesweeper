@@ -6,7 +6,7 @@ import org.scalatest.{Matchers, WordSpec}
 class EmptyCellSpec extends WordSpec with Matchers {
   "A EmptyCell" when {
     "new" should {
-      val emptyCell: EmptyCell = EmptyCell(flagged = false, visible = false)
+      val emptyCell: EmptyCell = EmptyCell(flagged = false, visible = false, 0)
       "have a boolean visible. It tells us if the cell is visible for the player" in {
         emptyCell.visible should be (false)
       }

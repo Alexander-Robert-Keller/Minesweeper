@@ -23,10 +23,20 @@ case class FlagCommand(controller: ControllerInterface) extends Command {
   }
 
   override def redoStep(): Unit = {
-    replaceSaveState()
+    val newBoard: BoardInterface = controller.board
+    val newGameState: GameStateInterface = controller.gameState
+    controller.board = board
+    controller.gameState = gameState
+    board = newBoard
+    gameState = newGameState
   }
 
   override def undoStep(): Unit = {
-    replaceSaveState()
+    val newBoard: BoardInterface = controller.board
+    val newGameState: GameStateInterface = controller.gameState
+    controller.board = board
+    controller.gameState = gameState
+    board = newBoard
+    gameState = newGameState
   }
 }

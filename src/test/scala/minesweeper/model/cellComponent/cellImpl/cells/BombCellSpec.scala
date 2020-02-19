@@ -6,7 +6,7 @@ import org.scalatest.{Matchers, WordSpec}
 class BombCellSpec extends WordSpec with Matchers {
   "A BombCell" when {
     "new" should {
-      val bombCell: BombCell = BombCell(flagged = false, visible = false)
+      val bombCell: BombCell = BombCell(flagged = false, visible = false, 0)
       "have a boolean visible. It tells us if the cell is visible for the player" in {
         bombCell.visible should be (false)
       }
