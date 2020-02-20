@@ -48,6 +48,7 @@ class Controller @Inject()(var gameState: GameStateInterface, var board: BoardIn
     System.exit(0)
   }
 
+  //TODO: add guards.
   def flagCell(x: Int, y: Int): Unit = {
     undoManager.doStep(FlagCommand(this), x, y)
     publish(new FlaggedCell)

@@ -6,7 +6,7 @@ import minesweeper.model.boardComponennt.BoardInterface
 import minesweeper.model.cellComponennt.CellFactory
 import minesweeper.model.cellComponennt.cells.Cell
 import minesweeper.model.gameStateComponent.GameStateInterface
-import minesweeper.util.{FlaggedCell, WonGame}
+import minesweeper.util. WonGame
 
 case class FlagCommand(controller: ControllerInterface) extends Command {
   override var board: BoardInterface = controller.board

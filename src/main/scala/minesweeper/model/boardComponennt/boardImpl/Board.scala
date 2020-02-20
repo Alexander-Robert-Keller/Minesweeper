@@ -105,6 +105,8 @@ class Board (matrix: Vector[Vector[Cell]], width: Int, height: Int, flags: Int, 
             case "Number" =>  boardString ++= getMatrix(x)(y).number.toString
             case "Bomb" =>  boardString ++= "B"
           }
+        } else if (getMatrix(x)(y).flagged) {
+          boardString ++= "F"
         } else {
           boardString ++= " "
         }

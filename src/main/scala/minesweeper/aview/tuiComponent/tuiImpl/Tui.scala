@@ -25,8 +25,16 @@ class Tui(controller: ControllerInterface) extends Reactor {
   def processInputLine(input: String): Unit = {
     tuiMenu = tuiMenu.determineMenu(controller)
     try {
-      val option = input.toInt
-      tuiMenu.action(option - 1, controller)
+      val inputArray = input.split(" ")
+      if (inputArray.length == 3) {
+        val option = inputArray(0).toInt - 1
+        val x = inputArray(1).toInt
+        val y = inputArray(2).toInt
+        tuiMenu.action(option, x, y, controller)
+      } else {
+        val option = inputArray(0).toInt - 1
+        tuiMenu.action(option, controller)
+      }
     } catch {
       case _: Exception => tuiMenu.action(Integer.MAX_VALUE, controller)
     }

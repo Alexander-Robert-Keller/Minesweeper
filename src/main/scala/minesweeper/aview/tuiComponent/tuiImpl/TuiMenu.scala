@@ -11,6 +11,14 @@ trait TuiMenu {
 
   def determineMenu(controller: ControllerInterface): TuiMenu
 
+  def action(index: Int, x: Int, y: Int, controller: ControllerInterface): Unit = {
+    if (menuOptions.size > index) {
+      menuOptions(index).action(controller, x, y)
+    } else {
+      WrongCommandMenuItem.action(controller)
+    }
+  }
+
   def action(index: Int, controller: ControllerInterface): Unit = {
     if (menuOptions.size > index) {
       menuOptions(index).action(controller)
