@@ -49,6 +49,7 @@ object MainMenu extends TuiMenu {
       case 0 => MainMenu
       case 1 => EnterFieldSize
       case 2 => GameMenu
+      case 3 => WonLostGameMenu
     }
   }
 }
@@ -64,6 +65,7 @@ object EnterFieldSize extends TuiMenu {
       case 0 => MainMenu
       case 1 => EnterFieldSize
       case 2 => GameMenu
+      case 3 => WonLostGameMenu
     }
   }
 }
@@ -82,6 +84,22 @@ object GameMenu extends TuiMenu {
       case 0 => MainMenu
       case 1 => EnterFieldSize
       case 2 => GameMenu
+      case 3 => WonLostGameMenu
+    }
+  }
+}
+
+object WonLostGameMenu extends TuiMenu {
+  add(UndoMenuItem)
+  add(RedoMenuItem)
+  add(ExitGameMenuItem)
+
+  override def determineMenu(controller: ControllerInterface): TuiMenu = {
+    controller.gameState.getState match {
+      case 0 => MainMenu
+      case 1 => EnterFieldSize
+      case 2 => GameMenu
+      case 3 => WonLostGameMenu
     }
   }
 }

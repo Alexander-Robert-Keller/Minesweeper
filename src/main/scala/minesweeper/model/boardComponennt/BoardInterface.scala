@@ -10,5 +10,5 @@ trait BoardInterface {
   def getFlags: Int
   def getBombs: Int
   def createNewBoard(maxWidth: Int, maxHeight: Int, maxBombs: Int): BoardInterface
-  def getUpdatedBoard(oldMatrix: Vector[Vector[Cell]], x: Int, y: Int, cell: Cell): BoardInterface
+  def getUpdatedBoard(oldMatrix: Vector[Vector[Cell]], x: Int, y: Int, newFlags: Int, cell: Cell): BoardInterface
 }

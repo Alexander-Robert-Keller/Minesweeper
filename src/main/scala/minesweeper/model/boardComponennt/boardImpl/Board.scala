@@ -90,8 +90,8 @@ class Board (matrix: Vector[Vector[Cell]], width: Int, height: Int, flags: Int, 
     oldMatrix(x).updated(y, cell)
   }
 
-  override def getUpdatedBoard(oldMatrix: Vector[Vector[Cell]], x: Int, y: Int, cell: Cell): BoardInterface = {
-    new Board(updateMatrix(oldMatrix, x, y, cell), width, height, flags, bombs)
+  override def getUpdatedBoard(oldMatrix: Vector[Vector[Cell]], x: Int, y: Int, newFlags: Int, cell: Cell): BoardInterface = {
+    new Board(updateMatrix(oldMatrix, x, y, cell), width, height, newFlags, bombs)
   }
 
   override def toString: String = {

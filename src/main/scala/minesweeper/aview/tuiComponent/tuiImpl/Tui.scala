@@ -48,8 +48,12 @@ class Tui(controller: ControllerInterface) extends Reactor {
       println(controller.board.toString)
       displayMenuOptions()
     case event: WonGame =>
+      println(controller.board.toString)
+      println(controller.wonGameString)
       displayMenuOptions()
     case event: LostGame =>
+      println(controller.board.toString)
+      println(controller.lostGameString)
       displayMenuOptions()
     case event: UnFlaggedCell =>
       println(controller.board.toString)

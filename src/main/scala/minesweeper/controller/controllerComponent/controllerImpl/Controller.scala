@@ -18,6 +18,8 @@ class Controller @Inject()(var gameState: GameStateInterface, var board: BoardIn
   val alreadyFlaggedString: String = "Cell was already flagged! Try again!"
   val alreadyVisibleString: String = "Cell was already visible! Try again!"
   val cellCantBeVisibleString: String = "Cell can´t be set visible if it is flagged. Unflag it first!"
+  val wonGameString: String = "Congratulations you cleared this Level!"
+  val lostGameString: String = "You Lost!"
 
   def initializeGame(input: String): Unit = {
     input match {
@@ -53,13 +55,15 @@ class Controller @Inject()(var gameState: GameStateInterface, var board: BoardIn
     System.exit(0)
   }
 
-  //TODO: add guards.
   def flagCell(x: Int, y: Int): Unit = {
     if (board.getMatrix(x)(y).flagged) {
       publish(new AlreadyFlagged)
       return
     }
     undoManager.doStep(FlagCommand(this), x, y)
+    if (checkWinAndLoseCondition()) {
+      return
+    }
     publish(new FlaggedCell)
   }
 
@@ -82,6 +86,9 @@ class Controller @Inject()(var gameState: GameStateInterface, var board: BoardIn
       return
     }
     undoManager.doStep(TurnVisibleCommand(this), x, y)
+    if (checkWinAndLoseCondition()) {
+      return
+    }
     publish(new TurnCellVisible)
   }
 
@@ -99,8 +106,47 @@ class Controller @Inject()(var gameState: GameStateInterface, var board: BoardIn
     publish(new RedoEvent)
   }
 
-  def winConditionFullFilled: Boolean = {
+  def checkWinAndLoseCondition(): Boolean = {
+    if (isWinConditionFullFilled) {
+      gameState = injector.instance[GameStateInterface](Names.named("WonLostGame"))
+      publish(new WonGame)
+      return true
+    }
+    if (isLoseConditionFullFilled) {
+      gameState = injector.instance[GameStateInterface](Names.named("WonLostGame"))
+      publish(new LostGame)
+      return true
+    }
     false
-    //TODO: change
+  }
+
+  def isLoseConditionFullFilled: Boolean = {
+    for (x <- board.getMatrix.indices) {
+      for (y <- board.getMatrix(0).indices) {
+        if (board.getMatrix(x)(y).name.equals("Bomb") && board.getMatrix(x)(y).visible) {
+          return true
+        }
+      }
+    }
+    false
+  }
+
+  def isWinConditionFullFilled: Boolean = {
+    if (board.getFlags >= board.getBombs) {
+      var count = 0
+      for (x <- board.getMatrix.indices) {
+        for (y <- board.getMatrix(0).indices) {
+          if (!board.getMatrix(x)(y).visible && !board.getMatrix(x)(y).flagged) {
+            return false
+          }
+          if (board.getMatrix(x)(y).name.equals("Bomb") && board.getMatrix(x)(y).flagged) {
+            count = count + 1
+          }
+        }
+      }
+      count == board.getBombs
+    } else {
+      false
+    }
   }
 }

@@ -1,6 +1,5 @@
 package minesweeper.aview.tuiComponent.tuiImpl
 
-import minesweeper.aview.tuiComponent.tuiImpl.UndoMenuItem.action
 import minesweeper.controller.controllerComponent.ControllerInterface
 
 trait MenuItems {
@@ -125,7 +124,7 @@ object BigBoardItem extends MenuItems {
 }
 
 object CostumeBoardItem extends MenuItems {
-  override val name: String = "Costum Board (add width and height with spaces between them)"
+  override val name: String = "Costume Board (add width and height with spaces between them)"
 
   override def action(controller: ControllerInterface): Unit = println("Please enter width and height properly!")
 

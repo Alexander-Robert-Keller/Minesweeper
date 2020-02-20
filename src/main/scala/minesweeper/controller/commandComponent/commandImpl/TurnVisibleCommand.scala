@@ -1,5 +1,6 @@
 package minesweeper.controller.commandComponent.commandImpl
 
+import com.google.inject.name.Names
 import minesweeper.controller.commandComponent.Command
 import minesweeper.controller.controllerComponent.ControllerInterface
 import minesweeper.model.boardComponennt.BoardInterface
@@ -7,6 +8,7 @@ import minesweeper.model.cellComponennt.CellFactory
 import minesweeper.model.cellComponennt.cells.Cell
 import minesweeper.model.gameStateComponent.GameStateInterface
 import minesweeper.util.{LostGame, WonGame}
+import net.codingwell.scalaguice.InjectorExtensions._
 
 case class TurnVisibleCommand(controller: ControllerInterface) extends Command {
   override var board: BoardInterface = controller.board
@@ -19,15 +21,7 @@ case class TurnVisibleCommand(controller: ControllerInterface) extends Command {
   override def doStep(x: Int, y: Int): Unit = {
     val cell: Cell = controller.board.getMatrix(x)(y)
     val tmp = CellFactory.setCellVisible(cell)
-    controller.board = controller.board.getUpdatedBoard(controller.board.getMatrix, x, y, tmp)
-    if (cell.toString.equals("Bomb")) {
-      controller.publish(new LostGame)
-      return
-    }
-    if (controller.winConditionFullFilled) {
-      controller.publish(new WonGame)
-      return
-    }
+    controller.board = controller.board.getUpdatedBoard(controller.board.getMatrix, x, y, controller.board.getFlags, tmp)
     if (cell.toString.equals("Empty")) {
       turnPatchVisible(x, y)
     }
@@ -71,7 +65,7 @@ case class TurnVisibleCommand(controller: ControllerInterface) extends Command {
     }
     val cell = controller.board.getMatrix(x)(y)
     val tmp = CellFactory.setCellVisible(cell)
-    controller.board = controller.board.getUpdatedBoard(controller.board.getMatrix, x, y, tmp)
+    controller.board = controller.board.getUpdatedBoard(controller.board.getMatrix, x, y, controller.board.getFlags, tmp)
     if (!visited.contains(Point(x, y)) && cell.name.equals("Empty")) {
       visited = Point(x, y):: visited
       toVisitQue = Point(x, y):: toVisitQue

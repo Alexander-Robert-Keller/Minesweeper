@@ -38,7 +38,7 @@ class BoardSpec extends WordSpec with Matchers {
         board.updateMatrix(board.getMatrix, 0, 0, CellFactory.createCell("Number", 0))(0)(0) shouldBe a[NumberCell]
       }
       "have a method to get a new Board with an updated cell (happens through the previous function)" in {
-        board.getUpdatedBoard(board.getMatrix, 0, 0, CellFactory.createCell("Number", 0)) shouldBe a[Board]
+        board.getUpdatedBoard(board.getMatrix, 0, 0, 0, CellFactory.createCell("Number", 0)) shouldBe a[Board]
       }
     }
   }

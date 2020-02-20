@@ -14,7 +14,7 @@ case class UnFlagCommand(controller: ControllerInterface) extends Command {
   override def doStep(x: Int, y: Int): Unit = {
     val cell: Cell = controller.board.getMatrix(x)(y)
     val tmp = CellFactory.setCellUnFlagged(cell)
-    controller.board = controller.board.getUpdatedBoard(controller.board.getMatrix, x, y, tmp)
+    controller.board = controller.board.getUpdatedBoard(controller.board.getMatrix, x, y,controller.board.getFlags - 1, tmp)
   }
 
   override def redoStep(): Unit = {
