@@ -24,4 +24,6 @@ trait ControllerInterface extends Publisher {
   def unFlagCell(x: Int, y: Int): Unit
   def turnCellVisible(x: Int, y: Int): Unit
   def noSuchCellFound(): Unit
+  def undo(): Unit
+  def redo(): Unit
 }

@@ -29,3 +29,7 @@ class AlreadyNotFlagged extends Event
 class AlreadyVisible extends Event
 
 class CellCantBeVisible extends Event
+
+class UndoEvent extends Event
+
+class RedoEvent extends Event

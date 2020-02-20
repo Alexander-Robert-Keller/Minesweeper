@@ -61,7 +61,7 @@ object ExitProgramMenuItem extends MenuItems {
 }
 
 object FlagCellMenuItem extends MenuItems {
-  override val name: String = "Flag Cell"
+  override val name: String = "Flag Cell (add x and y with cells, they start at 0)"
 
   override def action(controller: ControllerInterface): Unit = controller.noSuchCellFound()
 
@@ -69,7 +69,7 @@ object FlagCellMenuItem extends MenuItems {
 }
 
 object UnFlagCellMenuItem extends MenuItems {
-  override val name: String = "Unflag Cell"
+  override val name: String = "Unflag Cell (add x and y with cells, they start at 0)"
 
   override def action(controller: ControllerInterface): Unit = controller.noSuchCellFound()
 
@@ -77,7 +77,7 @@ object UnFlagCellMenuItem extends MenuItems {
 }
 
 object RevealCellMenuItem extends MenuItems {
-  override val name: String = "Reveal Cell"
+  override val name: String = "Reveal Cell (add x and y with cells, they start at 0)"
 
   override def action(controller: ControllerInterface): Unit = controller.noSuchCellFound()
 
@@ -87,7 +87,7 @@ object RevealCellMenuItem extends MenuItems {
 object UndoMenuItem extends MenuItems {
   override val name: String = "Undo"
 
-  override def action(controller: ControllerInterface): Unit = ???
+  override def action(controller: ControllerInterface): Unit = controller.undo()
 
   override def action(controller: ControllerInterface, x: Int, y: Int): Unit = action(controller)
 }
@@ -95,7 +95,7 @@ object UndoMenuItem extends MenuItems {
 object RedoMenuItem extends MenuItems {
   override val name: String = "Redo"
 
-  override def action(controller: ControllerInterface): Unit = ???
+  override def action(controller: ControllerInterface): Unit = controller.redo()
 
   override def action(controller: ControllerInterface, x: Int, y: Int): Unit = action(controller)
 }

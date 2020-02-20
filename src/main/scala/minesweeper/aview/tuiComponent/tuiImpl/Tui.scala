@@ -5,8 +5,6 @@ import minesweeper.util._
 
 import scala.swing.Reactor
 
-//TODO: fix determineMenu
-
 class Tui(controller: ControllerInterface) extends Reactor {
   listenTo(controller)
 
@@ -75,8 +73,14 @@ class Tui(controller: ControllerInterface) extends Reactor {
       println(controller.alreadyNotFlaggedString)
       displayMenuOptions()
     case event: CellCantBeVisible =>
-      println()
-      displayMenuOptions(controller.cellCantBeVisibleString)
+      println(controller.cellCantBeVisibleString)
+      displayMenuOptions()
+    case event: RedoEvent =>
+      println(controller.board.toString)
+      displayMenuOptions()
+    case event: UndoEvent =>
+      println(controller.board.toString)
+      displayMenuOptions()
     case _ => displayMenuOptions()
   }
 }

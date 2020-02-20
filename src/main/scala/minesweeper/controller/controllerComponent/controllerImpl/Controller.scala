@@ -88,6 +88,16 @@ class Controller @Inject()(var gameState: GameStateInterface, var board: BoardIn
     publish(new NoCellFound)
   }
 
+  def undo(): Unit = {
+    undoManager.undoStep()
+    publish(new UndoEvent)
+  }
+
+  def redo(): Unit = {
+    undoManager.redoStep()
+    publish(new RedoEvent)
+  }
+
   def winConditionFullFilled: Boolean = {
     false
     //TODO: change
