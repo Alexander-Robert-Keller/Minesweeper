@@ -9,6 +9,10 @@ trait ControllerInterface extends Publisher {
   var board: BoardInterface
   var gameState: GameStateInterface
   val noSuchCellFoundString: String
+  val alreadyNotFlaggedString: String
+  val alreadyFlaggedString: String
+  val alreadyVisibleString: String
+  val cellCantBeVisibleString: String
 
   def startGame(): Unit
   def endProgram(): Unit

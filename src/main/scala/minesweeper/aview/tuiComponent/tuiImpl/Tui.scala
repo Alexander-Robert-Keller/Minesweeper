@@ -65,6 +65,18 @@ class Tui(controller: ControllerInterface) extends Reactor {
     case event: NoCellFound =>
       println(controller.noSuchCellFoundString)
       displayMenuOptions()
+    case event: AlreadyVisible =>
+      println(controller.alreadyVisibleString)
+      displayMenuOptions()
+    case event: AlreadyFlagged =>
+      println(controller.alreadyFlaggedString)
+      displayMenuOptions()
+    case event: AlreadyNotFlagged =>
+      println(controller.alreadyNotFlaggedString)
+      displayMenuOptions()
+    case event: CellCantBeVisible =>
+      println()
+      displayMenuOptions(controller.cellCantBeVisibleString)
     case _ => displayMenuOptions()
   }
 }

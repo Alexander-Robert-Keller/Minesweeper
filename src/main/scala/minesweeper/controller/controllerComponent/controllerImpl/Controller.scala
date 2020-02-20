@@ -13,7 +13,11 @@ import minesweeper.util._
 class Controller @Inject()(var gameState: GameStateInterface, var board: BoardInterface) extends ControllerInterface {
   val injector: Injector = Guice.createInjector(new MinesweeperModule)
   val undoManager: UndoManager = new UndoManager
-  val noSuchCellFoundString: String = "No Such Cell Found! Try again!"
+  val noSuchCellFoundString: String = "No such cell found! Try again!"
+  val alreadyNotFlaggedString: String = "Cell was already not flagged! Try again!"
+  val alreadyFlaggedString: String = "Cell was already flagged! Try again!"
+  val alreadyVisibleString: String = "Cell was already visible! Try again!"
+  val cellCantBeVisibleString: String = "Cell can´t be set visible if it is flagged. Unflag it first!"
 
   def initializeGame(input: String): Unit = {
     input match {
@@ -50,16 +54,32 @@ class Controller @Inject()(var gameState: GameStateInterface, var board: BoardIn
 
   //TODO: add guards.
   def flagCell(x: Int, y: Int): Unit = {
+    if (board.getMatrix(x)(y).flagged) {
+      publish(new AlreadyFlagged)
+      return
+    }
     undoManager.doStep(FlagCommand(this), x, y)
     publish(new FlaggedCell)
   }
 
   def unFlagCell(x: Int, y: Int): Unit = {
+    if (!board.getMatrix(x)(y).flagged) {
+      publish(new AlreadyNotFlagged)
+      return
+    }
     undoManager.doStep(UnFlagCommand(this), x, y)
     publish(new UnFlaggedCell)
   }
 
   def turnCellVisible(x: Int, y: Int): Unit = {
+    if (board.getMatrix(x)(y).flagged) {
+      publish(new CellCantBeVisible)
+      return
+    }
+    if (board.getMatrix(x)(y).visible) {
+      publish(new AlreadyVisible)
+      return
+    }
     undoManager.doStep(TurnVisibleCommand(this), x, y)
     publish(new TurnCellVisible)
   }

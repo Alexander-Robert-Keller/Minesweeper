@@ -21,3 +21,11 @@ class EndGame extends Event
 class FieldSizeEntered extends Event
 
 class NoCellFound extends Event
+
+class AlreadyFlagged extends Event
+
+class AlreadyNotFlagged extends Event
+
+class AlreadyVisible extends Event
+
+class CellCantBeVisible extends Event
