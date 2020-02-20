@@ -48,8 +48,7 @@ object MainMenu extends TuiMenu {
     controller.gameState.getState match {
       case 0 => MainMenu
       case 1 => EnterFieldSize
-      case 2 => ??? //TODO: implement
-      case 3 => GameMenu
+      case 2 => GameMenu
     }
   }
 }
@@ -64,8 +63,7 @@ object EnterFieldSize extends TuiMenu {
     controller.gameState.getState match {
       case 0 => MainMenu
       case 1 => EnterFieldSize
-      case 2 => ??? //TODO: implement
-      case 3 => GameMenu
+      case 2 => GameMenu
     }
   }
 }
@@ -83,8 +81,7 @@ object GameMenu extends TuiMenu {
     controller.gameState.getState match {
       case 0 => MainMenu
       case 1 => EnterFieldSize
-      case 2 => ??? //TODO: implement
-      case 3 => GameMenu
+      case 2 => GameMenu
     }
   }
 }

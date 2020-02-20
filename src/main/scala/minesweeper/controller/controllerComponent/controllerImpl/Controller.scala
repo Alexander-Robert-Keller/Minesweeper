@@ -34,6 +34,7 @@ class Controller @Inject()(var gameState: GameStateInterface, var board: BoardIn
 
   def initializeGame(width: Int, height: Int): Unit = {
     board = board.createNewBoard(width, height, (height * width) / 4)
+    gameState = injector.instance[GameStateInterface](Names.named("InGame"))
     publish(new FieldSizeEntered)
   }
 

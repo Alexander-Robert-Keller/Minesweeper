@@ -61,7 +61,7 @@ object ExitProgramMenuItem extends MenuItems {
 }
 
 object FlagCellMenuItem extends MenuItems {
-  override val name: String = "Flag Cell (add x and y with cells, they start at 0)"
+  override val name: String = "Flag Cell (add x and y with spaces between them, they start at 0)"
 
   override def action(controller: ControllerInterface): Unit = controller.noSuchCellFound()
 
@@ -69,7 +69,7 @@ object FlagCellMenuItem extends MenuItems {
 }
 
 object UnFlagCellMenuItem extends MenuItems {
-  override val name: String = "Unflag Cell (add x and y with cells, they start at 0)"
+  override val name: String = "Unflag Cell (add x and y with spaces between them, they start at 0)"
 
   override def action(controller: ControllerInterface): Unit = controller.noSuchCellFound()
 
@@ -77,7 +77,7 @@ object UnFlagCellMenuItem extends MenuItems {
 }
 
 object RevealCellMenuItem extends MenuItems {
-  override val name: String = "Reveal Cell (add x and y with cells, they start at 0)"
+  override val name: String = "Reveal Cell (add x and y with spaces between them, they start at 0)"
 
   override def action(controller: ControllerInterface): Unit = controller.noSuchCellFound()
 
@@ -125,9 +125,9 @@ object BigBoardItem extends MenuItems {
 }
 
 object CostumeBoardItem extends MenuItems {
-  override val name: String = "Costum Board"
+  override val name: String = "Costum Board (add width and height with spaces between them)"
 
-  override def action(controller: ControllerInterface): Unit = ???
+  override def action(controller: ControllerInterface): Unit = println("Please enter width and height properly!")
 
   override def action(controller: ControllerInterface, x: Int, y: Int): Unit = controller.initializeGame(x, y)
 }

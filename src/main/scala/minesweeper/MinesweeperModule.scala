@@ -29,7 +29,6 @@ class MinesweeperModule extends AbstractModule with ScalaModule {
     bind[GameStateInterface].to[GameState]
     bind[GameStateInterface].annotatedWithName("MainMenu").toInstance(new GameState(0))
     bind[GameStateInterface].annotatedWithName("EnterFieldSize").toInstance(new GameState(1))
-    bind[GameStateInterface].annotatedWithName("CostumeBoard").toInstance(new GameState(2))
-    bind[GameStateInterface].annotatedWithName("InGame").toInstance(new GameState(3))
+    bind[GameStateInterface].annotatedWithName("InGame").toInstance(new GameState(2))
   }
 }
