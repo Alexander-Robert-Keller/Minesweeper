@@ -26,6 +26,10 @@ class Board (matrix: Vector[Vector[Cell]], width: Int, height: Int, flags: Int, 
     new Board(tmp, maxWidth, maxHeight, 0, maxBombs)
   }
 
+  override def createNewBoard(newMatrix: Vector[Vector[Cell]], newWidth: Int, newHeight: Int, newFlaggs: Int, newBombs: Int): BoardInterface = {
+    new Board(newMatrix, newWidth, newHeight, newFlaggs, newBombs)
+  }
+
   def setNumbers(maxWidth: Int, maxHeight: Int, maxBombs: Int, oldMatrix: Vector[Vector[Cell]]): Vector[Vector[Cell]] = {
     var tmp: Vector[Vector[Cell]] = oldMatrix
     for (x <- 0 until maxWidth) {

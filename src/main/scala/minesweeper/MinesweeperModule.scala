@@ -5,6 +5,7 @@ import com.google.inject.name.Names
 import minesweeper.controller.controllerComponent.ControllerInterface
 import minesweeper.model.boardComponennt.BoardInterface
 import minesweeper.model.boardComponennt.boardImpl._
+import minesweeper.model.fileIoComponent.FileIoInterface
 import minesweeper.model.gameStateComponent.GameStateInterface
 import minesweeper.model.gameStateComponent.gameStateImpl.GameState
 import net.codingwell.scalaguice.ScalaModule
@@ -18,6 +19,7 @@ class MinesweeperModule extends AbstractModule with ScalaModule {
     bindConstant().annotatedWith(Names.named("DefaultValue")).to(defaultValue)
 
     bind[ControllerInterface].to[controller.controllerComponent.controllerImpl.Controller]
+    bind[FileIoInterface].to[model.fileIoComponent.fileIoJasonImpl.FileIo]
 
     // there are two possible ways to create a new Board, over the injection or over the boardInterface itself
     bind[BoardInterface].to[AdvancedBoard]

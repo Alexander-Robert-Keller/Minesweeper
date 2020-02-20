@@ -42,8 +42,10 @@ class Tui(controller: ControllerInterface) extends Reactor {
     case event: EnterFieldSize =>
       displayMenuOptions()
     case event: EndGame =>
+      println(controller.endGameString)
       displayMenuOptions()
     case event: EndProgram =>
+      println(controller.endProgramString)
     case event: TurnCellVisible =>
       println(controller.board.toString)
       displayMenuOptions()
@@ -84,6 +86,17 @@ class Tui(controller: ControllerInterface) extends Reactor {
       displayMenuOptions()
     case event: UndoEvent =>
       println(controller.board.toString)
+      displayMenuOptions()
+    case event: SaveGame =>
+      println(controller.saveGameString)
+      println(controller.board.toString)
+      displayMenuOptions()
+    case event: LoadGame =>
+      println(controller.loadGameString)
+      println(controller.board.toString)
+      displayMenuOptions()
+    case event: FailedLoadGame =>
+      println(controller.failedLoadGameString)
       displayMenuOptions()
     case _ => displayMenuOptions()
   }

@@ -7,12 +7,16 @@ import minesweeper.MinesweeperModule
 import minesweeper.controller.commandComponent.commandImpl._
 import minesweeper.controller.controllerComponent.ControllerInterface
 import minesweeper.model.boardComponennt.BoardInterface
+import minesweeper.model.fileIoComponent.FileIoInterface
 import minesweeper.model.gameStateComponent.GameStateInterface
 import minesweeper.util._
 
 class Controller @Inject()(var gameState: GameStateInterface, var board: BoardInterface) extends ControllerInterface {
   val injector: Injector = Guice.createInjector(new MinesweeperModule)
   val undoManager: UndoManager = new UndoManager
+  val fileIo: FileIoInterface = injector.getInstance(classOf[FileIoInterface])
+  val endProgramString: String = "Exit Program!"
+  val endGameString: String = "Returns to main menu!"
   val noSuchCellFoundString: String = "No such cell found! Try again!"
   val alreadyNotFlaggedString: String = "Cell was already not flagged! Try again!"
   val alreadyFlaggedString: String = "Cell was already flagged! Try again!"
@@ -20,6 +24,10 @@ class Controller @Inject()(var gameState: GameStateInterface, var board: BoardIn
   val cellCantBeVisibleString: String = "Cell can´t be set visible if it is flagged. Unflag it first!"
   val wonGameString: String = "Congratulations you cleared this Level!"
   val lostGameString: String = "You Lost!"
+  val failedLoadGameString: String = "It failed to load the save state!"
+  val loadGameString: String = "Save state was successfully loaded!"
+  val saveGameString: String = "Save state was successfully created!"
+  val path: String = "src/main/scala/resources/fileIo/saveState"
 
   def initializeGame(input: String): Unit = {
     input match {
@@ -120,7 +128,7 @@ class Controller @Inject()(var gameState: GameStateInterface, var board: BoardIn
     false
   }
 
-  def isLoseConditionFullFilled: Boolean = {
+  private def isLoseConditionFullFilled: Boolean = {
     for (x <- board.getMatrix.indices) {
       for (y <- board.getMatrix(0).indices) {
         if (board.getMatrix(x)(y).name.equals("Bomb") && board.getMatrix(x)(y).visible) {
@@ -131,7 +139,7 @@ class Controller @Inject()(var gameState: GameStateInterface, var board: BoardIn
     false
   }
 
-  def isWinConditionFullFilled: Boolean = {
+  private def isWinConditionFullFilled: Boolean = {
     if (board.getFlags >= board.getBombs) {
       var count = 0
       for (x <- board.getMatrix.indices) {
@@ -148,5 +156,19 @@ class Controller @Inject()(var gameState: GameStateInterface, var board: BoardIn
     } else {
       false
     }
+  }
+
+  def loadGame(): Unit = {
+    //try {
+      fileIo.load(path, this)
+      publish(new LoadGame)
+    /*} catch {
+      case _ : Exception => publish(new FailedLoadGame)
+    }*/
+  }
+
+  def saveGame(): Unit = {
+    fileIo.save(path, board, gameState)
+    publish(new SaveGame)
   }
 }

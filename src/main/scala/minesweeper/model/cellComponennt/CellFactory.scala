@@ -14,6 +14,14 @@ object CellFactory {
     }
   }
 
+  def createCell(cell: String, number: Int, visible: Boolean, flagged: Boolean): Cell = {
+    cell match {
+      case "Bomb" => BombCell(flagged, visible, number)
+      case "Empty" => EmptyCell(flagged, visible, number)
+      case "Number" => NumberCell(flagged, visible, number)
+    }
+  }
+
   def setCellFlagged(cell: Cell): Cell = {
     cell.toString match {
       case "Bomb" => BombCell(flagged = true, cell.visible, cell.number)

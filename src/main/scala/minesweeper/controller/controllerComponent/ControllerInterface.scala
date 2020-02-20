@@ -10,6 +10,8 @@ trait ControllerInterface extends Publisher {
   var board: BoardInterface
   var gameState: GameStateInterface
   val injector: Injector
+  val endProgramString: String
+  val endGameString: String
   val noSuchCellFoundString: String
   val alreadyNotFlaggedString: String
   val alreadyFlaggedString: String
@@ -17,6 +19,10 @@ trait ControllerInterface extends Publisher {
   val cellCantBeVisibleString: String
   val wonGameString: String
   val lostGameString: String
+  val failedLoadGameString: String
+  val loadGameString: String
+  val saveGameString: String
+  val path: String
 
   def startGame(): Unit
   def endProgram(): Unit
@@ -29,4 +35,6 @@ trait ControllerInterface extends Publisher {
   def noSuchCellFound(): Unit
   def undo(): Unit
   def redo(): Unit
+  def loadGame(): Unit
+  def saveGame(): Unit
 }

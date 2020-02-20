@@ -30,7 +30,7 @@ object StartGameMenuItem extends MenuItems {
 object SaveGameMenuItem extends MenuItems {
   override val name: String = "Save Game"
 
-  override def action(controller: ControllerInterface): Unit = ???
+  override def action(controller: ControllerInterface): Unit = controller.saveGame()
 
   override def action(controller: ControllerInterface, x: Int, y: Int): Unit = action(controller)
 }
@@ -38,7 +38,7 @@ object SaveGameMenuItem extends MenuItems {
 object LoadGameMenuItem extends MenuItems {
   override val name: String = "Load Game"
 
-  override def action(controller: ControllerInterface): Unit = ???
+  override def action(controller: ControllerInterface): Unit = controller.loadGame()
 
   override def action(controller: ControllerInterface, x: Int, y: Int): Unit = action(controller)
 }

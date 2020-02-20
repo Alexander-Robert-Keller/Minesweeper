@@ -75,6 +75,7 @@ object GameMenu extends TuiMenu {
   add(FlagCellMenuItem)
   add(UnFlagCellMenuItem)
   add(SaveGameMenuItem)
+  add(LoadGameMenuItem)
   add(UndoMenuItem)
   add(RedoMenuItem)
   add(ExitGameMenuItem)
@@ -91,7 +92,6 @@ object GameMenu extends TuiMenu {
 
 object WonLostGameMenu extends TuiMenu {
   add(UndoMenuItem)
-  add(RedoMenuItem)
   add(ExitGameMenuItem)
 
   override def determineMenu(controller: ControllerInterface): TuiMenu = {

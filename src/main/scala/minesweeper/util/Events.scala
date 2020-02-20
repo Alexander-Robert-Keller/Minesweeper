@@ -33,3 +33,9 @@ class CellCantBeVisible extends Event
 class UndoEvent extends Event
 
 class RedoEvent extends Event
+
+class LoadGame extends Event
+
+class FailedLoadGame extends Event
+
+class SaveGame extends Event
