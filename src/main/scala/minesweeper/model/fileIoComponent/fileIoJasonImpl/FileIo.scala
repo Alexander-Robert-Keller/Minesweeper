@@ -12,7 +12,7 @@ import play.api.libs.json.{JsBoolean, JsNumber, JsObject, JsString, Json}
 
 import scala.io.Source
 
-class FileIo extends FileIoInterface{
+class FileIo extends FileIoInterface {
   override def load(path: String, controller: ControllerInterface): Unit = {
     val sourceBuffered = Source.fromFile(path + ".json")
     val source = sourceBuffered.getLines.mkString
