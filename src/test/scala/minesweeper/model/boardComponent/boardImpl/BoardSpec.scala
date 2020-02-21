@@ -26,6 +26,10 @@ class BoardSpec extends WordSpec with Matchers {
       }
       "have a method to create a new Board" in {
         board.createNewBoard(2, 2, 1) shouldBe a[Board]
+        board.createNewBoard(board.getMatrix, board.getWidth, board.getHeight, board.getFlags, board.getBombs) shouldBe a[Board]
+      }
+      "have a method set Numbers. This function sets all empty fields near a bomb to a Number cell and calculates their number" in {
+        board.setNumbers(2, 2, 2, board.setBombs(2,2,2, board.getMatrix)) shouldBe a[Vector[Vector[Cell]]]
       }
       "have a method to set Bombs" in {
         board.setBombs(2,2,4, board.getMatrix)(0)(0) shouldBe a[BombCell]
@@ -39,6 +43,9 @@ class BoardSpec extends WordSpec with Matchers {
       }
       "have a method to get a new Board with an updated cell (happens through the previous function)" in {
         board.getUpdatedBoard(board.getMatrix, 0, 0, 0, CellFactory.createCell("Number", 0)) shouldBe a[Board]
+      }
+      "have a toString method. It returns a String representing the board" in {
+        board.toString shouldBe a[String]
       }
     }
   }

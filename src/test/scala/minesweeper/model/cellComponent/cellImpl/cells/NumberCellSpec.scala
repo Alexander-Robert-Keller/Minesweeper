@@ -16,6 +16,12 @@ class NumberCellSpec extends WordSpec with Matchers {
       "have a Int number. It tells us how many bombs are adjacent to this cell" in {
         numberCell.number should be (1)
       }
+      "have a String name. It represents which kind of cell it is" in {
+        numberCell.name should be ("Number")
+      }
+      "have a method toString which returns the name String" in {
+        numberCell.toString should be ("Number")
+      }
     }
   }
 }

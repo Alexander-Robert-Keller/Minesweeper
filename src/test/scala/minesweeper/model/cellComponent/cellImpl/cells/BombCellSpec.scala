@@ -13,6 +13,15 @@ class BombCellSpec extends WordSpec with Matchers {
       "have a boolean flagged. It tells us if the cell has been flagged by the player" in {
         bombCell.flagged should be (false)
       }
+      "have a Int number. It is unimportant for bombs" in {
+        bombCell.number should be(0)
+      }
+      "have a String name. It represents which kind of cell it is" in {
+        bombCell.name should be ("Bomb")
+      }
+      "have a method toString which returns the name String" in {
+        bombCell.toString should be ("Bomb")
+      }
     }
   }
 }

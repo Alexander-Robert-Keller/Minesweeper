@@ -13,6 +13,15 @@ class EmptyCellSpec extends WordSpec with Matchers {
       "have a boolean flagged. It tells us if the cell has been flagged by the player" in {
         emptyCell.flagged should be (false)
       }
+      "have a Int number. It is unimportant for empty cells" in {
+        emptyCell.number should be (0)
+      }
+      "have a String name. It represents which kind of cell it is" in {
+        emptyCell.name should be ("Empty")
+      }
+      "have a method toString which returns the name String" in {
+        emptyCell.toString should be ("Empty")
+      }
     }
   }
 }
