@@ -68,6 +68,10 @@ class Controller @Inject()(var gameState: GameStateInterface, var board: BoardIn
       publish(new AlreadyFlagged)
       return
     }
+    if (board.getMatrix(x)(y).visible) {
+      publish(new AlreadyVisible)
+      return
+    }
     undoManager.doStep(FlagCommand(this), x, y)
     if (checkWinAndLoseCondition()) {
       return
@@ -128,7 +132,7 @@ class Controller @Inject()(var gameState: GameStateInterface, var board: BoardIn
     false
   }
 
-  private def isLoseConditionFullFilled: Boolean = {
+  def isLoseConditionFullFilled: Boolean = {
     for (x <- board.getMatrix.indices) {
       for (y <- board.getMatrix(0).indices) {
         if (board.getMatrix(x)(y).name.equals("Bomb") && board.getMatrix(x)(y).visible) {
@@ -139,7 +143,7 @@ class Controller @Inject()(var gameState: GameStateInterface, var board: BoardIn
     false
   }
 
-  private def isWinConditionFullFilled: Boolean = {
+  def isWinConditionFullFilled: Boolean = {
     if (board.getFlags >= board.getBombs) {
       var count = 0
       for (x <- board.getMatrix.indices) {

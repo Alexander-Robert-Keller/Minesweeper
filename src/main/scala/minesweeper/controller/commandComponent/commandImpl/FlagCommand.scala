@@ -1,6 +1,5 @@
 package minesweeper.controller.commandComponent.commandImpl
 
-import com.google.inject.name.Names
 import minesweeper.controller.commandComponent.Command
 import minesweeper.controller.controllerComponent.ControllerInterface
 import minesweeper.model.boardComponennt.BoardInterface

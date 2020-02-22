@@ -8,7 +8,7 @@ import minesweeper.model.cellComponennt.CellFactory
 import minesweeper.model.cellComponennt.cells.Cell
 import minesweeper.model.fileIoComponent.FileIoInterface
 import minesweeper.model.gameStateComponent.GameStateInterface
-import play.api.libs.json.{JsBoolean, JsNumber, JsObject, JsString, Json}
+import play.api.libs.json.{JsBoolean, JsNumber, JsObject, JsString, JsValue, Json}
 
 import scala.io.Source
 
@@ -23,13 +23,15 @@ class FileIo extends FileIoInterface {
     val flags: Int = (json \ "Minesweeper" \ "Board" \ "Flags").get.toString().toInt
     val bombs: Int = (json \ "Minesweeper" \ "Board" \ "Bombs").get.toString().toInt
     var matrix: Vector[Vector[Cell]] = Vector[Vector[Cell]]()
+    var count: Int = 0
     for (x <- 0 until width) {
       var yAxis: Vector[Cell] = Vector[Cell]()
       for (y <- 0 until height) {
-        val name: String = (json \\ "Name")(x * width + y).as[String]
-        val number: Int = (json \\ "Number")(x * width + y).as[Int]
-        val visible: Boolean = (json \\ "Visible")(x * width + y).as[Boolean]
-        val flagged: Boolean = (json \\ "Flagged")(x * width + y).as[Boolean]
+        val name: String = (json \\ "Name")(count).as[String]
+        val number: Int = (json \\ "Number")(count).as[Int]
+        val visible: Boolean = (json \\ "Visible")(count).as[Boolean]
+        val flagged: Boolean = (json \\ "Flagged")(count).as[Boolean]
+        count = count + 1
         yAxis = yAxis :+ CellFactory.createCell(name, number, visible, flagged)
       }
       matrix = matrix :+ yAxis
@@ -61,35 +63,23 @@ class FileIo extends FileIoInterface {
           "Height" -> JsNumber(board.getHeight),
           "Flags" -> JsNumber(board.getFlags),
           "Bombs" -> JsNumber(board.getBombs),
-          "Matrix" -> Json.toJson(
-            xAxis(board)
-          )
+          "Matrix" -> saveCells(board)
         )
       )
     )
   }
 
-  def xAxis(board: BoardInterface): JsObject = {
-    Json.obj(
-      "xCell" -> Json.toJson(
+  def saveCells(board: BoardInterface): JsValue = {
+    Json.toJson(
         for {
           x <- board.getMatrix.indices
         } yield {
-          yAxis(board, x)
+          for {
+            y <- board.getMatrix(0).indices
+          } yield {
+            cellToJason(board, x, y)
+          }
         }
-      )
-    )
-  }
-
-  def yAxis(board: BoardInterface, x: Int): JsObject = {
-    Json.obj(
-      "yCell" -> Json.toJson(
-        for {
-          y <- board.getMatrix(0).indices
-        } yield {
-          cellToJason(board, x, y)
-        }
-      )
     )
   }
 

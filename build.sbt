@@ -4,7 +4,7 @@ scalaVersion := "2.12.7"
 libraryDependencies += "org.scalactic" %% "scalactic" % "3.0.8"
 libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.8" % "test"
 libraryDependencies += "com.google.inject" % "guice" % "4.1.0"
-libraryDependencies += "net.codingwell" %% "scala-guice" % "4.2.6"
+libraryDependencies += "net.codingwell" %% "scala-guice" % "4.1.0"
 libraryDependencies += "org.scala-lang.modules" %% "scala-swing" % "2.1.1"
 
 libraryDependencies += "org.scala-lang.modules" % "scala-xml_2.12" % "1.0.6"

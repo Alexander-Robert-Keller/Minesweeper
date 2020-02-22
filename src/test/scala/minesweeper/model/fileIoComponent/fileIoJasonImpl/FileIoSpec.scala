@@ -5,7 +5,7 @@ import minesweeper.MinesweeperModule
 import minesweeper.controller.controllerComponent.ControllerInterface
 import minesweeper.model.fileIoComponent.fileIoJasonImpl.FileIo
 import org.scalatest.{Matchers, WordSpec}
-import play.api.libs.json.JsObject
+import play.api.libs.json.{JsObject, JsValue}
 
 class FileIoSpec extends WordSpec with Matchers {
   "A FileIo object" when {
@@ -23,11 +23,8 @@ class FileIoSpec extends WordSpec with Matchers {
       "have a method to create a JsObject of the GameState and the Board" in {
         fileIo.gameSaveState(controller.board, controller.gameState) shouldBe a[JsObject]
       }
-      "have a method to create a JsObject of the matrix(x)(y)" in {
-        fileIo.xAxis(controller.board) shouldBe a[JsObject]
-      }
-      "have a method to create a JsObject of a certain x in the matrix(x)(y)" in {
-        fileIo.yAxis(controller.board, 0) shouldBe a[JsObject]
+      "have a method to create a JsValue of the matrix(x)(y)" in {
+        fileIo.saveCells(controller.board) shouldBe a[JsValue]
       }
       "have a method to create a JsObject of a Cell" in {
         fileIo.cellToJason(controller.board, 0, 0) shouldBe a[JsObject]
